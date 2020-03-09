@@ -1,8 +1,11 @@
-from django.urls import *
+from django.urls import path, re_path, include
 from . import views
-from .views import ListSongsView
+from .views import SongsList, SongsDetail
 
 urlpatterns = [
-    path('', views.index),
-    path('songs/', ListSongsView.as_view(), name="songs-all"),
+    # path('',  views.index, name='index'),
+    path('', SongsDetail.as_view(), name="songs-create"),
+    re_path(r'^((?P<id>\d+)/)$', SongsList.as_view(), name="songs-all"),
+    # 'api/(?P<version>(v1|v2))/'
+    # path('songs/', ListSongsView.as_view(), name="songs-all"),
 ]
